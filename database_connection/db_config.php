@@ -1,10 +1,10 @@
 <?php
-$db_user = "id4671877_monthon993";
-$db_password = "Barenz028002182";
-$db_database = "id4671877_projectdata";
+$db_user = "id4940165_ngingearth";
+$db_password = "ngingearth";
+$db_database = "id4940165_maintenance";
 $db_server = "localhost";
 
-$base_url = "https://barenz.000webhostapp.com/";
+$base_url = "https://nging.earth.000webhostapp.com/";
 
 // for local test.
 // $db_user = "root";
