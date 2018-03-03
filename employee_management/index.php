@@ -10,49 +10,64 @@ if (check_authentication()) {
 ?>
 <html>
 <head>
-	<link href="./css/index.css" rel="stylesheet" type="text/css" />
-	<title>Employee</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <title>Employee</title>
 </head>
 <body>
-	<ul>
-  		<li><a href="index.php">Home</a></li>
-		<li><a href="../machine_management/machine.php">Machine</a></li>
-  		<li style="float:right"><a href="./php_action/logout.php" onclick="return confirm('Are you sure to logout?')">Log out</a></li>
-		<li class="idname">User ID: <i class="user"><?php echo $_SESSION["employee"]["userid"] . "</i> Username: <i class='user'>" . $_SESSION["employee"]["username"]?></i></li>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<ul class="navbar-nav  mr-auto">
+  	  <li class="nav-item active">
+		<a class="nav-link" href="index.php">Employee</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="../machine_management/machine.php">Machine</a>
+	  </li>
 	</ul>
+	<span class="navbar-text">User ID: <?php echo $_SESSION["employee"]["userid"] . " - Username: " . $_SESSION["employee"]["username"]?></span>
+	<ul class="navbar-nav ml-auto">
+  	  <li class="nav-item">
+		<a class="nav-link" href="./php_action/logout.php" onclick="return confirm('Are you sure to logout?')"> Log out </a>
+	  </li>
+	</ul>
+	<form class="form-inline my-2 my-lg-0" action="create_employee_form.php">
+	  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add new</button>
+	</form>
+  </nav>
 
-	<div class="button_link"><a href="create_employee_form.php">Add New</a></div>
-	<table class="tbl-qa">	
-		<thead>
-			 <tr>
-			 	<th class="table-header" width="5%"> Userimage </th>
-				<th class="table-header" width="5%"> Userid </th>
-				<th class="table-header" width="5%"> Username </th>
-				<th class="table-header" width="5%"> Password </th>
-				<th class="table-header" width="5%"> Department </th>
-				<th class="table-header" width="5%" colspan="2">Action</th>
-			  </tr>
-		</thead>
-		<tbody>		
-			<?php
-				if ($result->num_rows > 0) {		
-					while($row = $result->fetch_assoc()) {
-			?>
-			<tr>
-        		<td class="table-row"><img id="emp_image" src="../assets/emp_images/<?php echo $row["emp_image"];?>" width="75" alt="<?php echo $row["username"]; ?>" /></td>
-				<td class="table-row"><?php echo $row["userid"]; ?></td> 
-				<td class="table-row"><?php echo $row["username"]; ?></td>
-				<td class="table-row"><?php echo $row["password"]; ?></td>
-				<td class="table-row"><?php echo $row["department"]; ?></td>
-				<!-- action -->
-				<td class="table-row" colspan="2"><a href="update_employee_form.php?id=<?php echo $row["id"]; ?>" class="link"><img title="Edit" src="icon/edit.png"/></a> <a href="./php_action/delete_employee.php?id=<?php echo $row["id"]; ?>" class="link"><img name="delete" id="delete" title="Delete" onclick="return confirm('Are you sure you want to delete?')" src="icon/delete.png"/></a></td>
-			</tr>
-			<?php
-					}
+
+  <table class="table">	
+    <thead thead-light>
+	  <tr>
+        <th scope="col" width="5%"> User Image </th>
+		<th scope="col" width="5%"> User ID </th>
+		<th scope="col" width="5%"> Username </th>
+		<th scope="col" width="5%"> Password </th>
+		<th scope="col" width="5%"> Department </th>
+		<th scope="col" width="5%" colspan="2">Action</th>
+	  </tr>
+	</thead>
+	<tbody>		
+	    <?php
+		if ($result->num_rows > 0) {		
+			while($row = $result->fetch_assoc()) {
+		?>
+	  <tr>
+		<td><img id="emp_image" class="img-fluid" src="../assets/emp_images/<?php echo $row["emp_image"];?>" width="75" alt="<?php echo $row["username"]; ?>" /></td>
+		<td><?php echo $row["userid"]; ?></td> 
+		<td ><?php echo $row["username"]; ?></td>
+		<td ><?php echo $row["password"]; ?></td>
+		<td ><?php echo $row["department"]; ?></td>
+		<td  colspan="2"><a class="btn btn-primary" role="button" href="update_employee_form.php?id=<?php echo $row["id"]; ?>" class="link">Edit</a> <a class="btn btn-danger" role="button" href="./php_action/delete_employee.php?id=<?php echo $row["id"]; ?>" class="link" onclick="return confirm('Are you sure you want to delete?')"/>Delete</a></td>
+	  </tr>
+		<?php
 				}
-			?>
-		</tbody>
-	</table>
+			}
+		?>
+	</tbody>
+  </table>
 </body>
 </html>
 <?php } else {

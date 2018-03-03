@@ -29,10 +29,6 @@
 						<label for="lg_password" class="sr-only">Password</label>
 						<input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
 					</div>
-					<div class="form-group login-group-checkbox">
-						<input type="checkbox" id="lg_remember" name="lg_remember">
-						<label for="lg_remember">remember</label>
-					</div>
 				</div>
 				<button type="submit" name="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
 			</div>
