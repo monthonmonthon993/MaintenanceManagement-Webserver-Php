@@ -14,10 +14,11 @@ if (check_authentication()) {
 		}
 ?>
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-874" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -98,8 +99,8 @@ if (check_authentication()) {
 						</tr>
 					</thead>
 
-					<?php if ($result->num_rows > 0) {		
-						$row = $result->fetch_assoc(); ?>
+					<?php if ($result->num_rows > 0) {
+						while($row = $result->fetch_assoc()) { ?>
 
 					<tbody>
 						<tr>
@@ -110,7 +111,7 @@ if (check_authentication()) {
 						</tr>
 					</tbody>
 
-					<?php } ?>
+					<?php } } ?>
 
 				</table>
 			</div>	
@@ -138,7 +139,7 @@ if (check_authentication()) {
 					</thead>
 
 						<?php if ($result->num_rows > 0) {		
-							$row = $result->fetch_assoc(); ?>
+							while($row = $result->fetch_assoc()) { ?>
 
 					<tbody>
 						<tr>
@@ -149,7 +150,7 @@ if (check_authentication()) {
 						</tr>
 					</tbody>
 
-						<?php } ?>
+						<?php } }?>
 
 				</table>
 			</div>
@@ -175,7 +176,7 @@ if (check_authentication()) {
 						</tr>
 					</thead>
 						<?php if ($result->num_rows > 0) {		
-							$row = $result->fetch_assoc(); ?>
+							while($row = $result->fetch_assoc()) { ?>
 					<tbody>
 						<tr>
 							<th scope="row"><?php echo $row["id_yearly"]; ?></th>
@@ -184,7 +185,7 @@ if (check_authentication()) {
 							<td><?php echo $row["note"]; ?></td>
 						</tr>
 					</tbody>
-						<?php }
+						<?php } }
 							$conn->close(); ?>
 				</table>
 			</div>
